@@ -32,10 +32,11 @@ namespace amesensible.Core.Commands
 
         public async Task<IEnumerable<SoulInNeed>> Handle(LocateSoulInNeedCommand request, CancellationToken cancellationToken)
         {
-            var ames = await _soulInNeedRepository.GetSoulInNeedNearbyPosition(request.Latitude, request.Longitude, NearbyDistance);
+            var gps = new GpsCoordinate(request.Latitude, request.Longitude);
+
+            var ames = await _soulInNeedRepository.GetSoulInNeedNearbyPosition(gps, NearbyDistance);
             if (ames.Any()) return ames;
 
-            var gps = new GpsCoordinate(request.Latitude, request.Longitude);
             var ameBesoin = new SoulInNeed(gps, true);
             _soulInNeedRepository.Add(ameBesoin);
 

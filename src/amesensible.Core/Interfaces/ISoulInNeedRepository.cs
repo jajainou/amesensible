@@ -6,6 +6,6 @@ namespace amesensible.Core.Interfaces
 {
     public interface ISoulInNeedRepository : IRepository<SoulInNeed>
     {
-        Task<IEnumerable<SoulInNeed>> GetSoulInNeedNearbyPosition(float latitude, float longitude, int distance);
+        Task<IEnumerable<SoulInNeed>> GetSoulInNeedNearbyPosition(GpsCoordinate gps, int distance);
     }
 }

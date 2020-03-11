@@ -33,7 +33,7 @@ namespace amesensible.Specs.Business.StepDefinitions
         {
             var mRepos = new Mock<ISoulInNeedRepository>();
             //search ab nearby
-            mRepos.Setup(r => r.GetSoulInNeedNearbyPosition(It.IsAny<float>(), It.IsAny<float>(), It.IsAny<int>()))
+            mRepos.Setup(r => r.GetSoulInNeedNearbyPosition(It.IsAny<GpsCoordinate>(), It.IsAny<int>()))
             .Returns(Task.FromResult(new SoulInNeed[] { }.AsEnumerable()));
             //
             mRepos.Setup(r => r.Add(It.IsAny<SoulInNeed>()));
@@ -51,7 +51,7 @@ namespace amesensible.Specs.Business.StepDefinitions
         {
             var mRepos = new Mock<ISoulInNeedRepository>();
             //search ab nearby
-            mRepos.Setup(r => r.GetSoulInNeedNearbyPosition(It.IsAny<float>(), It.IsAny<float>(), distance))
+            mRepos.Setup(r => r.GetSoulInNeedNearbyPosition(It.IsAny<GpsCoordinate>(), distance))
             .Returns(Task.FromResult(new SoulInNeed[] { new SoulInNeed(new GpsCoordinate(_locateAbCommand.Latitude, _locateAbCommand.Longitude), false) }.AsEnumerable()));
 
             var handler = new LocateSoulInNeedHandler(mRepos.Object);
